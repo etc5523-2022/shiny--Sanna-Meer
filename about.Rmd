@@ -1,11 +1,11 @@
 
 #### Data
 
-This data shows the waiting time between eruptions
-and the duration of the eruption for the Old Faithful
-geyser in Yellowstone National Park, Wyoming, USA.
-The data source is from Azzalini & Bowman (1990) 
-*"A look at some data on the Old Faithful geyser." Applied Statistics*, 39, 357–365.
+This data shows the calories in various famous fast food items across different joints
+along with the nutritional breakdown like calories, protein, fats, cholesterol, sugar etc in those items.
+The data source is from *Fast Food Nutrition* 
+(fastfoodnutrition.com)
+
 
 
 #### Purpose
@@ -20,7 +20,7 @@ The data showed obvious signs of bimodality (both in the marginal and joint dist
 
 #### Creator
 
-Emi Tanaka (emi.tanaka@monash.edu)
+Sanna Meer (smee0005@student.monash.edu)
 
 <details>
 <summary>Session information</summary>

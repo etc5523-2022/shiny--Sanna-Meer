@@ -1,6 +1,7 @@
 .about {
-  background-color: #e3e3e3;
+  background-color: #99FF99;
   border: 1px dashed grey;
+  color: black;
   padding: 10px;
   border-radius: 5px;
 }
@@ -10,7 +11,7 @@
 }
 
 h3 {
-  color: #006DAE;
+  color: white;
   font-size: 1.5em;
 }
 

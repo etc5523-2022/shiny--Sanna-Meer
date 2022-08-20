@@ -1,73 +1,48 @@
 library(shiny)
 library(tidyverse)
+library(shinythemes)
+library(plotly)
+library(shinydashboard)
+
+data <- read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-09-04/fastfood_calories.csv")
+
+restaurants <- sort(unique(data$restaurant))
+items <- sort(unique(data$item))
+
 
 ui <- fluidPage(
+  tags$h2("KNOW YOUR FAST FOODS",
+          style="color:yellow;text-align:center"),
+  theme = shinytheme("superhero"),
+           h3("How healthy is your favourite fast food restaurant? Lets compare!!"),
 
-    titlePanel("Old Faithful Geyser Data"),
+           selectInput(
+             inputId = "rest", label = "Restaurant Name",
+             choices = restaurants, multiple = T
+           ),
+           plotOutput("plot", width = "800px", height = "800px"),
+           br(),
 
-    h3("1. What number of bins do you stop seeing bimodality in the waiting time?"),
-    fluidRow(
-      sidebarLayout(
-          sidebarPanel(
-              sliderInput("bins",
-                          "Number of bins:",
-                          min = 1,
-                          max = 50,
-                          value = 30)
-          ),
+           h3("Have a look at the protein distribution in these foods!"),
 
-          mainPanel(
-             plotOutput("distPlot")
-          )
-      )
-    ),
+           selectInput(
+             inputId = "item", label = "Item Name",
+             choices = items, multiple = F
+           ),
+           plotOutput("protein_plot", width = "400px", height = "400px"),
 
-    h3("2. How do the different geoms change the view of the data?"),
-    fluidRow(
-      sidebarLayout(
-        sidebarPanel(
-          radioButtons("geom",
-                      "Geom choice:",
-                      choices = c("geom_point",
-                                  "geom_density_2d",
-                                  "geom_density_2d_filled",
-                                  "geom_bin_2d",
-                                  "geom_hex"))
-        ),
+           h3("Pick an item from the below options to see its nutrient breakdown"),
+  radioButtons("choice", "Choice:",
+               c("Big Mac" = "big",
+                 "Spicy Deluxe" = "spi",
+                 "Whopper with Cheese" = "whopper",
+                 "Footlong B.L.T." = "foot",
+                 "Shredded Chicken Burrito" = "burrito")),
 
-        mainPanel(
-          plotOutput("plot")
-        )
-      )
-    ),
+  # br() element to introduce extra vertical spacing ----
+  br(),
 
-    h3("3. Is a mixture of two normal distribution good fit on eruption time?"),
-    fluidRow(
-      sidebarLayout(
-        sidebarPanel(
-          sliderInput("bins2",
-                      "Adjust the number of bins (if needed):",
-                      min = 1,
-                      max = 50,
-                      value = 30),
-          "Enter your guess for the:",
-          numericInput("p", "Mixing probability:",
-                       value = 0.35, min = 0, max = 1),
-          numericInput("mean1", "Mean of the first group:",
-                       value = 2.02),
-          numericInput("mean2", "Mean of the second group:",
-                       value = 4.27),
-          numericInput("sd1", "Standard deviation of the first group:",
-                       value = 0.24, min = 0),
-          numericInput("sd2", "Standard deviation of the second group:",
-                       value = 0.44, min = 0)
-        ),
-
-        mainPanel(
-          plotOutput("mixDistFit")
-        )
-      )
-    ),
+  plotOutput("nutrient_plot", width = "400px", height = "400px"),
 
 
     fluidRow(
@@ -76,36 +51,48 @@ ui <- fluidPage(
                  uiOutput('about'))
       )
     ),
-    includeCSS("styles.css")
+
+
+includeCSS("styles.css")
 )
 
-server <- function(input, output) {
 
-    output$distPlot <- renderPlot({
-        ggplot(faithful, aes(waiting)) +
-         geom_histogram(bins = input$bins, color = "white") +
-         theme_bw(base_size = 14) +
-         labs(x = "Waiting time", y = "Count")
-    })
 
-    output$plot <- renderPlot({
-      ggplot(faithful, aes(waiting, eruptions)) +
-        get(input$geom)() +
-        theme_bw(base_size = 14) +
-        labs(x = "Waiting time", y = "Eruption time")
-    })
 
-    output$mixDistFit <- renderPlot({
-      df <- data.frame(x = seq(min(faithful$eruptions), max(faithful$eruptions), length = 1000)) %>%
-        mutate(density = input$p * dnorm(x, input$mean1, input$sd1) +
-                         (1 - input$p) * dnorm(x, input$mean2, input$sd2))
+server <- function(input, output, session) {
+  output$plot <- renderPlot({
+    rest <- req(input$rest)
+    data %>%
+      filter(restaurant %in% rest) %>%
+      ggplot(aes(x = total_fat, y = calories, colour = restaurant , group =item)) +
+      labs(title="Total fat and calories in restaurants")+
+      xlab("Total Fat")+
+      ylab("Calories") +
+      geom_line() +
+      geom_point() +
+      facet_wrap(vars(restaurant), ncol = 1)
+  })
 
-      ggplot(faithful, aes(eruptions)) +
-        geom_histogram(aes(y = stat(density)), bins = input$bins2, color = "white") +
-        geom_line(data = df, aes(x = x, y = density), color = "red", size = 2) +
-        theme_bw(base_size = 14) +
-        labs(x = "Eruption time", y = "Density")
-    })
+  output$protein_plot <- renderPlot({
+    F <- data %>% filter(restaurant%in%c("Taco Bell","Arbys","Chick Fil-A","Dairy Queen","Mcdonalds"))
+    ggplot(F) +
+      aes(x = protein, fill = input$item) +
+      geom_histogram(bins = 30L) +
+      scale_fill_hue() +
+      theme_minimal()
+  })
+
+  output$nutrient_plot <- renderPlot({
+    F <- data %>% filter(item%in%c("Big Mac","Spicy Deluxe","Whopper with Cheese","Footlong B.L.T.","Shredded Chicken Burrito"))
+    ggplot(F) +
+      aes(x = input$item, y= sugar, fill = sugar) +
+      geom_col() +
+      scale_fill_hue() +
+      theme_minimal()
+  })
+
+
+
 
     output$about <- renderUI({
       knitr::knit("about.Rmd", quiet = TRUE) %>%
