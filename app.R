@@ -33,6 +33,18 @@ ui <- fluidPage(
       tabsetPanel(
         id = "tabs",
         tabPanel(
+          title = "About",
+          fluidRow(
+            column(10,
+                   div(class = "about",
+                       uiOutput('about'))
+            )
+          )
+        ),
+        br(),
+
+
+        tabPanel(
           title = "Comparison",
           br(),
           h3("How healthy is your favourite fast food restaurant? Lets compare!!"),
@@ -83,15 +95,6 @@ tabPanel(
 ),
 
 br(),
-tabPanel(
-  title = "About",
-    fluidRow(
-      column(10,
-             div(class = "about",
-                 uiOutput('about'))
-      )
-    )
-  ),
 
 includeCSS("styles.css")
 )

@@ -2,8 +2,8 @@
 #### Data
 
 This data shows the calories in various fast food items across different famous joints along with the nutritional breakdown like calories, protein, fats, cholesterol, sugar etc in those items.
-The data source is from *Fast Food Nutrition* 
-(fastfoodnutrition.com)
+The data source is from [*Fast Food Nutrition*] 
+(https://fastfoodnutrition.org/)
 
 
 
