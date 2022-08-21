@@ -9,13 +9,14 @@ The data source is from *Fast Food Nutrition*
 
 #### Purpose
 
-The purpose of the app is to:
+The purpose of the app is to:  
+Make a consumer aware of how healthy or unhealthy fast food is so that they become aware of what goes in the food they eat. This is done interactively in three ways:  
 
-1. make a user understand how each restauren
-2. show how the different plot choices make certain features of data more striking, and 
-3. interactively show the user the foods with highest cholesterol level so that they is made aware of the same. 
+1. make a user understand and aware of how each restaurant fares in terms of total fat and calories in their items.  
+2. show how much protein distribution these items have, 
+3. show the user the foods with highest cholesterol level so that they are aware of the same. 
 
-The data showed obvious signs of bimodality (both in the marginal and joint distribution). The app used interactive components to see how the choices in plot elements (e.g. number of bins and plot types) effect the visibility of these features. The last part used an interactive approach for a user to decide the model parameters that fit the data. 
+As expected, fast food data is high in calories , fat and cholesterol content.However, even a healthy approach is taken and the protein content is checked for in these items. The app uses interactive components to see how the choices that a consumer makes effect the visibility of these nutrients.
 
 #### Creator
 

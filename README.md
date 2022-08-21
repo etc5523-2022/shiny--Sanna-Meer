@@ -1,11 +1,11 @@
 
-# ETC5523 Assessment 1
+# Fast Food Calories App
 
-This is a **sample** app for the ETC5523 Assessment 1. 
+This is an app for understanding the Nutrients of Fast Foods. 
 
-* The creator of this app is **Emi Tanaka**.
-* The data used for this assessment is the `faithful` data that is in-built in R. 
+* The creator of this app is **Sanna Meer**.
+* The data used for this app is called Fast Food Calories from the [Fast Food Nutrition](fastfoodnutrition.com) website 
 
-The goal of the app is in part explanatory (identify factors that affect what we see in a plot) and in part descriptive (describing the marginal or joint distribution of data).
+The goal of the app is to make a fast food consumer aware and understand what really is the nutritional breakdown in fast foods from famous fast food joints. This app takes an interactive approach to convey this message so that the user is free to choose the input he would like to examine.
 
-The link to the app can be found at [https://ebsmonash.shinyapps.io/etc5523-assessment1-sample/](https://ebsmonash.shinyapps.io/etc5523-assessment1-sample/)
+The link to the app can be found  [here](https://hxlcvk-sanna-meer.shinyapps.io/shiny--Sanna-Meer/)
