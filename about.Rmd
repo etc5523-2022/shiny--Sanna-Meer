@@ -1,8 +1,7 @@
 
 #### Data
 
-This data shows the calories in various famous fast food items across different joints
-along with the nutritional breakdown like calories, protein, fats, cholesterol, sugar etc in those items.
+This data shows the calories in various fast food items across different famous joints along with the nutritional breakdown like calories, protein, fats, cholesterol, sugar etc in those items.
 The data source is from *Fast Food Nutrition* 
 (fastfoodnutrition.com)
 
@@ -12,9 +11,9 @@ The data source is from *Fast Food Nutrition*
 
 The purpose of the app is to:
 
-1. show how the number of bins in a histogram reveals/hides the bimodality in the data,
+1. make a user understand how each restauren
 2. show how the different plot choices make certain features of data more striking, and 
-3. interactively estimate the best parameters for the mixture of two normal distributions to the data. 
+3. interactively show the user the foods with highest cholesterol level so that they is made aware of the same. 
 
 The data showed obvious signs of bimodality (both in the marginal and joint distribution). The app used interactive components to see how the choices in plot elements (e.g. number of bins and plot types) effect the visibility of these features. The last part used an interactive approach for a user to decide the model parameters that fit the data. 
 
